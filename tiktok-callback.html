@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>TikTok Authorization — Lost History Channel</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  body { font-family: Georgia, serif; max-width: 640px; margin: 60px auto; padding: 0 20px; line-height: 1.6; color: #222; }
+  h1 { font-size: 1.4em; }
+  .box { background: #f4f4f4; border: 1px solid #ccc; padding: 16px; border-radius: 6px; word-break: break-all; font-family: monospace; margin: 12px 0; }
+  .label { font-weight: bold; margin-top: 20px; }
+  button { padding: 8px 16px; cursor: pointer; }
+</style>
+</head>
+<body>
+  <h1>TikTok Authorization Callback</h1>
+  <p>Copy the <code>code</code> value below and paste it into the local
+  token-exchange script within a few minutes (this code expires quickly).</p>
+
+  <div class="label">Authorization code:</div>
+  <div class="box" id="code">(reading URL...)</div>
+  <button onclick="copyCode()">Copy code</button>
+
+  <div class="label">State:</div>
+  <div class="box" id="state">(reading URL...)</div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get('code') || '(no code found in URL — authorization may have failed)';
+    const state = params.get('state') || '(none)';
+    document.getElementById('code').textContent = code;
+    document.getElementById('state').textContent = state;
+
+    function copyCode() {
+      navigator.clipboard.writeText(document.getElementById('code').textContent);
+      alert('Code copied to clipboard.');
+    }
+  </script>
+</body>
+</html>
